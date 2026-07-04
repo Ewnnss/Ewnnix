@@ -7,174 +7,229 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
     <style>
+        /* Cache la langue non sélectionnée */
         html[lang="fr"] .en-text { display: none; }
         html[lang="en"] .fr-text { display: none; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white">
 
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">Ewnnix Bot</span>
-                <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2 py-1 rounded border border-slate-700">
-                    <span class="fr-text">Privé</span>
-                    <span class="en-text">Private</span>
-                </span>
+    <div id="language-gate" class="fixed inset-0 z-[100] bg-slate-950 flex flex-col items-center justify-center p-6 transition-opacity duration-500">
+        <div class="space-y-10 text-center max-w-lg w-full">
+            
+            <div class="space-y-3">
+                <h1 class="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">Ewnnix Bot</h1>
+                <p class="text-slate-400 font-mono text-sm">System Documentation</p>
             </div>
             
-            <div class="flex space-x-1 bg-slate-800 p-1 rounded border border-slate-700">
-                <button onclick="setLang('fr')" id="btn-fr" class="px-3 py-1 text-xs font-bold rounded bg-slate-600 text-white transition">FR</button>
-                <button onclick="setLang('en')" id="btn-en" class="px-3 py-1 text-xs font-bold rounded text-slate-400 hover:text-white transition">EN</button>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
-
-        <section class="space-y-4">
-            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">
-                <span class="fr-text">Surveillance vocale <span class="text-blue-400">avancée</span>.</span>
-                <span class="en-text">Advanced voice <span class="text-blue-400">monitoring</span>.</span>
-            </h1>
-            <p class="text-lg text-slate-400 leading-relaxed">
-                <span class="fr-text">Un bot Discord privé conçu pour tracer chaque mouvement et action de modération dans vos salons vocaux avec une précision chirurgicale.</span>
-                <span class="en-text">A private Discord bot designed to track every movement and moderation action in your voice channels with surgical precision.</span>
-            </p>
-        </section>
-
-        <hr class="border-slate-800" />
-
-        <section class="space-y-6">
-            <h2 class="text-2xl font-bold tracking-tight text-slate-200">
-                <span class="fr-text">Fonctionnalités Principales</span>
-                <span class="en-text">Core Features</span>
+            <h2 class="text-xl font-medium text-slate-200">
+                Choose your language<br>
+                <span class="text-slate-500 text-base">Choisissez votre langue</span>
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button onclick="enterSite('fr')" class="p-6 rounded-2xl border border-slate-800 bg-slate-900/50 hover:bg-slate-800 hover:border-blue-500 transition-all group flex flex-col items-center space-y-2">
+                    <span class="text-3xl">🇫🇷</span>
+                    <span class="font-bold text-slate-300 group-hover:text-blue-400 transition-colors">Français</span>
+                </button>
                 
-                <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-red-500/10 rounded-bl-full"></div>
-                    <h3 class="font-semibold text-red-400">
-                        <span class="fr-text">Traçage des Mutes</span>
-                        <span class="en-text">Mute Tracking</span>
-                    </h3>
-                    <p class="text-sm text-slate-400">
-                        <span class="fr-text">Historique complet des coupures de micro forcées. Identifie le modérateur, la cible et la raison.</span>
-                        <span class="en-text">Complete history of forced mic mutes. Identifies the moderator, the target, and the reason.</span>
-                    </p>
-                </div>
-
-                <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-amber-500/10 rounded-bl-full"></div>
-                    <h3 class="font-semibold text-amber-400">
-                        <span class="fr-text">Traçage des Sourdines</span>
-                        <span class="en-text">Deafen Tracking</span>
-                    </h3>
-                    <p class="text-sm text-slate-400">
-                        <span class="fr-text">Enregistrement des mises en sourdine (casque coupé). Idéal pour surveiller les abus de modération.</span>
-                        <span class="en-text">Records forced deafen actions. Ideal for monitoring moderation abuse.</span>
-                    </p>
-                </div>
-
-                <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-bl-full"></div>
-                    <h3 class="font-semibold text-emerald-400">
-                        <span class="fr-text">Installation Express</span>
-                        <span class="en-text">Express Setup</span>
-                    </h3>
-                    <p class="text-sm text-slate-400">
-                        <span class="fr-text">Une seule commande slash génère instantanément toute la catégorie et les salons nécessaires.</span>
-                        <span class="en-text">A single slash command instantly generates the private category and all necessary channels.</span>
-                    </p>
-                </div>
-
-                <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-blue-500/10 rounded-bl-full"></div>
-                    <h3 class="font-semibold text-blue-400">
-                        <span class="fr-text">Sécurité Whitelist</span>
-                        <span class="en-text">Whitelist Security</span>
-                    </h3>
-                    <p class="text-sm text-slate-400">
-                        <span class="fr-text">Le bot quitte automatiquement tout serveur non autorisé. Vos logs restent confidentiels.</span>
-                        <span class="en-text">The bot automatically leaves unauthorized servers. Your logs remain strictly confidential.</span>
-                    </p>
-                </div>
-
+                <button onclick="enterSite('en')" class="p-6 rounded-2xl border border-slate-800 bg-slate-900/50 hover:bg-slate-800 hover:border-blue-500 transition-all group flex flex-col items-center space-y-2">
+                    <span class="text-3xl">🇬🇧</span>
+                    <span class="font-bold text-slate-300 group-hover:text-blue-400 transition-colors">English</span>
+                </button>
             </div>
-        </section>
-
-        <section class="space-y-6">
-            <h2 class="text-2xl font-bold tracking-tight text-slate-200">
-                <span class="fr-text">Installation et Structure</span>
-                <span class="en-text">Setup and Structure</span>
-            </h2>
             
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
-                <div>
-                    <h3 class="text-lg font-semibold text-slate-200 mb-2">
-                        <span class="fr-text">Commande de configuration</span>
-                        <span class="en-text">Configuration Command</span>
-                    </h3>
-                    <div class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800">
-                        <code class="text-blue-400 font-mono font-bold">/setup</code>
-                        <span class="text-sm text-slate-400">
-                            <span class="fr-text">Crée la catégorie privée "Logs Vocaux" et verrouille les permissions.</span>
-                            <span class="en-text">Creates the private "Voice Logs" category and locks permissions.</span>
-                        </span>
+        </div>
+    </div>
+
+    <div id="site-content" class="hidden opacity-0 transition-opacity duration-500">
+        
+        <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+            <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">Ewnnix Bot</span>
+                    <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2 py-1 rounded border border-slate-700">
+                        <span class="fr-text">Privé</span>
+                        <span class="en-text">Private</span>
+                    </span>
+                </div>
+                
+                <div class="flex space-x-1 bg-slate-800 p-1 rounded border border-slate-700">
+                    <button onclick="setLang('fr')" id="btn-fr" class="px-3 py-1 text-xs font-bold rounded bg-slate-600 text-white transition">FR</button>
+                    <button onclick="setLang('en')" id="btn-en" class="px-3 py-1 text-xs font-bold rounded text-slate-400 hover:text-white transition">EN</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
+
+            <section class="space-y-4">
+                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">
+                    <span class="fr-text">Surveillance vocale <span class="text-blue-400">avancée</span>.</span>
+                    <span class="en-text">Advanced voice <span class="text-blue-400">monitoring</span>.</span>
+                </h1>
+                <p class="text-lg text-slate-400 leading-relaxed">
+                    <span class="fr-text">Un bot Discord privé conçu pour tracer chaque mouvement et action de modération dans vos salons vocaux avec une précision chirurgicale.</span>
+                    <span class="en-text">A private Discord bot designed to track every movement and moderation action in your voice channels with surgical precision.</span>
+                </p>
+            </section>
+
+            <hr class="border-slate-800" />
+
+            <section class="space-y-6">
+                <h2 class="text-2xl font-bold tracking-tight text-slate-200">
+                    <span class="fr-text">Fonctionnalités Principales</span>
+                    <span class="en-text">Core Features</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-red-500/10 rounded-bl-full"></div>
+                        <h3 class="font-semibold text-red-400">
+                            <span class="fr-text">Traçage des Mutes</span>
+                            <span class="en-text">Mute Tracking</span>
+                        </h3>
+                        <p class="text-sm text-slate-400">
+                            <span class="fr-text">Historique complet des coupures de micro forcées. Identifie le modérateur, la cible et la raison.</span>
+                            <span class="en-text">Complete history of forced mic mutes. Identifies the moderator, the target, and the reason.</span>
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-amber-500/10 rounded-bl-full"></div>
+                        <h3 class="font-semibold text-amber-400">
+                            <span class="fr-text">Traçage des Sourdines</span>
+                            <span class="en-text">Deafen Tracking</span>
+                        </h3>
+                        <p class="text-sm text-slate-400">
+                            <span class="fr-text">Enregistrement des mises en sourdine (casque coupé). Idéal pour surveiller les abus de modération.</span>
+                            <span class="en-text">Records forced deafen actions. Ideal for monitoring moderation abuse.</span>
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-bl-full"></div>
+                        <h3 class="font-semibold text-emerald-400">
+                            <span class="fr-text">Installation Express</span>
+                            <span class="en-text">Express Setup</span>
+                        </h3>
+                        <p class="text-sm text-slate-400">
+                            <span class="fr-text">Une seule commande slash génère instantanément toute la catégorie et les salons nécessaires.</span>
+                            <span class="en-text">A single slash command instantly generates the private category and all necessary channels.</span>
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-blue-500/10 rounded-bl-full"></div>
+                        <h3 class="font-semibold text-blue-400">
+                            <span class="fr-text">Sécurité Whitelist</span>
+                            <span class="en-text">Whitelist Security</span>
+                        </h3>
+                        <p class="text-sm text-slate-400">
+                            <span class="fr-text">Le bot quitte automatiquement tout serveur non autorisé. Vos logs restent confidentiels.</span>
+                            <span class="en-text">The bot automatically leaves unauthorized servers. Your logs remain strictly confidential.</span>
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <h2 class="text-2xl font-bold tracking-tight text-slate-200">
+                    <span class="fr-text">Installation et Structure</span>
+                    <span class="en-text">Setup and Structure</span>
+                </h2>
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-200 mb-2">
+                            <span class="fr-text">Commande de configuration</span>
+                            <span class="en-text">Configuration Command</span>
+                        </h3>
+                        <div class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800">
+                            <code class="text-blue-400 font-mono font-bold">/setup</code>
+                            <span class="text-sm text-slate-400">
+                                <span class="fr-text">Crée la catégorie privée "Logs Vocaux" et verrouille les permissions.</span>
+                                <span class="en-text">Creates the private "Voice Logs" category and locks permissions.</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-200 mb-3">
+                            <span class="fr-text">Salons générés</span>
+                            <span class="en-text">Generated Channels</span>
+                        </h3>
+                        <ul class="space-y-2 text-sm font-mono text-slate-300">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-slate-500">#</span>
+                                <span>🎤››・modérations</span>
+                                <span class="text-slate-500 text-xs ml-2 font-sans italic">
+                                    <span class="fr-text">(Réception embeds Mute/Sourdine)</span>
+                                    <span class="en-text">(Receives Mute/Deafen embeds)</span>
+                                </span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-slate-500">#</span>
+                                <span>🎤››・mouvements</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-slate-500">#</span>
+                                <span>🎤››・états</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-slate-500">#</span>
+                                <span>🎤››・analyse</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </section>
 
-                <div>
-                    <h3 class="text-lg font-semibold text-slate-200 mb-3">
-                        <span class="fr-text">Salons générés</span>
-                        <span class="en-text">Generated Channels</span>
-                    </h3>
-                    <ul class="space-y-2 text-sm font-mono text-slate-300">
-                        <li class="flex items-center space-x-2">
-                            <span class="text-slate-500">#</span>
-                            <span>🎤››・modérations</span>
-                            <span class="text-slate-500 text-xs ml-2 font-sans italic">
-                                <span class="fr-text">(Réception des embeds Mute/Sourdine)</span>
-                                <span class="en-text">(Receives Mute/Deafen embeds)</span>
-                            </span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="text-slate-500">#</span>
-                            <span>🎤››・mouvements</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="text-slate-500">#</span>
-                            <span>🎤››・états</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="text-slate-500">#</span>
-                            <span>🎤››・analyse</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        </main>
 
-    </main>
+        <footer class="border-t border-slate-900 bg-slate-950 py-8 text-center text-sm text-slate-500 space-y-2">
+            <p>
+                <span class="fr-text">Ewnnix Bot — Système de modération privé.</span>
+                <span class="en-text">Ewnnix Bot — Private moderation system.</span>
+            </p>
+            <p class="text-xs">
+                <span class="fr-text">Un bug ? Contactez</span>
+                <span class="en-text">Found a bug? Contact</span>
+                <a href="mailto:ewnnss7@gmail.com" class="text-blue-400 hover:underline">ewnnss7@gmail.com</a>
+            </p>
+        </footer>
 
-    <footer class="border-t border-slate-900 bg-slate-950 py-8 text-center text-sm text-slate-500 space-y-2">
-        <p>
-            <span class="fr-text">Ewnnix Bot — Système de modération privé.</span>
-            <span class="en-text">Ewnnix Bot — Private moderation system.</span>
-        </p>
-        <p class="text-xs">
-            <span class="fr-text">Un bug ? Contactez</span>
-            <span class="en-text">Found a bug? Contact</span>
-            <a href="mailto:ewnnss7@gmail.com" class="text-blue-400 hover:underline">ewnnss7@gmail.com</a>
-        </p>
-    </footer>
+    </div>
 
     <script>
+        // Fonction déclenchée par les gros boutons d'accueil
+        function enterSite(lang) {
+            // 1. Définir la langue choisie
+            setLang(lang);
+            
+            // 2. Faire disparaître le portail en fondu
+            const gate = document.getElementById('language-gate');
+            const content = document.getElementById('site-content');
+            
+            gate.style.opacity = '0';
+            
+            // 3. Après le fondu (500ms), cacher le portail et afficher le site
+            setTimeout(() => {
+                gate.classList.add('hidden');
+                content.classList.remove('hidden');
+                
+                // Petit délai pour déclencher l'apparition en fondu du site
+                setTimeout(() => {
+                    content.classList.remove('opacity-0');
+                }, 50);
+            }, 500);
+        }
+
+        // Fonction pour changer la langue et mettre à jour les boutons du menu haut
         function setLang(lang) {
-            // 1. Change l'attribut lang de la page (ce qui déclenche le CSS en haut)
             document.documentElement.lang = lang;
             
-            // 2. Met à jour le style des boutons
             const btnFr = document.getElementById('btn-fr');
             const btnEn = document.getElementById('btn-en');
             
@@ -190,4 +245,3 @@
 
 </body>
 </html>
-
